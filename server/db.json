@@ -3,7 +3,7 @@
     {
       "id": 1763913091537,
       "username": "Bechuotbe",
-      "password": "Bechuotbe149",
+      "password": "$2b$10$2i9WAsQCcAfqiXgUhpO4SunEsDM7rTJS5CWsebVo.yJElNMJowxNW",
       "department": "Department of Computer Science and Engineering"
     },
     {
@@ -33,6 +33,34 @@
         "studentId": "2121",
         "agreedToTerms": true
       }
+    },
+    {
+      "id": 1764331758288,
+      "username": "caphefalumi",
+      "password": "$2b$10$OI5CAmZCOk5iUH25FMQcY.dSw9LvcU0zLcJuiCGJfB66sL8M1EXli",
+      "department": "Department of Computer Science and Engineering",
+      "profile": {
+        "identity": "student",
+        "gender": "female",
+        "accountNumber": null,
+        "name": null,
+        "dateOfBirth": null,
+        "email": null,
+        "mobilePhone": null,
+        "enrollment": {
+          "year": null,
+          "level": null
+        },
+        "school": {
+          "city": null,
+          "name": null
+        },
+        "durationOfStudy": null,
+        "departmentInstitute": null,
+        "yearClass": null,
+        "studentId": null,
+        "agreedToTerms": true
+      }
     }
   ],
   "testResults": [],
@@ -46,6 +74,11 @@
       "userId": 1764049777966,
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE3NjQwNDk3Nzc5NjYsInVzZXJuYW1lIjoiQmVjaHVvdCIsInR5cGUiOiJyZWZyZXNoIiwiaWF0IjoxNzY0MDQ5Nzc3fQ.TXSRKsX-AAIyDVz6cLm5mKyZC0HBPV-JryazBvbBbLI",
       "createdAt": "2025-11-25T05:49:37.982Z"
+    },
+    {
+      "userId": 1764331758288,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE3NjQzMzE3NTgyODgsInVzZXJuYW1lIjoiY2FwaGVmYWx1bWkiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc2NDMzMTc2OH0.V5rdpDSSEANNRc3aYJ1yVxK1Y1a929OKawcF3WtBHRc",
+      "createdAt": "2025-11-28T12:09:28.780Z"
     }
   ],
   "questions": [

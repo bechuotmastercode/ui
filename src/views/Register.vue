@@ -20,7 +20,9 @@
                 v-model="password" 
                 label="Password" 
                 prepend-icon="mdi-lock" 
-                type="password"
+                :type="showPassword ? 'text' : 'password'"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="showPassword = !showPassword"
                 :rules="passwordRules"
                 hint="Must be at least 6 characters with uppercase, lowercase, and number"
                 persistent-hint
@@ -29,7 +31,9 @@
                 v-model="confirmPassword" 
                 label="Confirm Password" 
                 prepend-icon="mdi-lock-check" 
-                type="password"
+                :type="showConfirmPassword ? 'text' : 'password'"
+                :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="showConfirmPassword = !showConfirmPassword"
                 :rules="confirmPasswordRules"
                 required></v-text-field>
               <v-select 
@@ -154,8 +158,9 @@ export default {
       username: '',
       password: '',
       confirmPassword: '',
+      showPassword: false,
+      showConfirmPassword: false,
       department: null,
-      // profile fields
       identity: 'student',
       gender: 'female',
       accountNumber: '',
