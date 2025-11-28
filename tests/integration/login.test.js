@@ -37,7 +37,7 @@ describe('Login View Integration', () => {
 
     // Mock successful API response
     fetchMock.mockResolvedValueOnce({
-      json: () => Promise.resolve({ success: true, user: { username: 'test' } })
+      json: () => Promise.resolve({ success: true, user: { username: 'test' }, accessToken: 'access-token', refreshToken: 'refresh-token' })
     })
 
     // Set input values

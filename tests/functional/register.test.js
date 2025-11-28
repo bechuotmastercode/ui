@@ -19,7 +19,12 @@ describe('Register View Functional', () => {
           'v-toolbar': { template: '<div><slot /></div>' },
           'v-toolbar-title': { template: '<div><slot /></div>' },
           'v-card-text': { template: '<div><slot /></div>' },
-          'v-form': { template: '<form @submit.prevent="$emit(\'submit\', $event)"><slot /></form>' },
+          'v-form': { 
+            template: '<form ref="form" @submit.prevent="$emit(\'submit\', $event)"><slot /></form>',
+            methods: {
+              validate: () => Promise.resolve({ valid: true })
+            }
+          },
           'v-text-field': {
             template: '<input :value="modelValue" @input="$emit(\'update:modelValue\', $event.target.value)" />',
             props: ['modelValue']
@@ -32,7 +37,13 @@ describe('Register View Functional', () => {
             template: '<button type="submit"><slot /></button>'
           },
           'router-link': { template: '<a><slot /></a>' },
-          'v-snackbar': { template: '<div><slot /></div>' }
+          'v-snackbar': { template: '<div><slot /></div>' },
+          'v-radio-group': { template: '<div><slot /></div>' },
+          'v-radio': { template: '<div></div>' },
+          'v-checkbox': { 
+            template: '<input type="checkbox" :checked="modelValue" @change="$emit(\'update:modelValue\', $event.target.checked)" />',
+            props: ['modelValue']
+          }
         },
         mocks: {
           $router: { push: pushMock }
@@ -41,7 +52,7 @@ describe('Register View Functional', () => {
     })
 
     fetchMock.mockResolvedValueOnce({
-      json: () => Promise.resolve({ success: true, user: { username: 'newuser' } })
+      json: () => Promise.resolve({ success: true, user: { username: 'newuser' }, accessToken: 'access-token', refreshToken: 'refresh-token' })
     })
 
     const inputs = wrapper.findAll('input')
