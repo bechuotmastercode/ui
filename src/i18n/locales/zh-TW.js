@@ -45,8 +45,11 @@ export default {
   auth: {
     loginTitle: '會員登入',
     loginSubtitle: '歡迎回來！請輸入你的帳號密碼',
+    loginHint: '使用加密憑證安全登入',
     registerTitle: '加入會員',
     registerSubtitle: '立即加入，開啟你的職涯探索之旅',
+    accountInfo: '帳號資訊',
+    personalInfo: '個人資料',
     username: '帳號',
     password: '密碼',
     confirmPassword: '確認密碼',

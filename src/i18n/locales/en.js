@@ -45,8 +45,11 @@ export default {
   auth: {
     loginTitle: 'Login to Your Account',
     loginSubtitle: 'Welcome back! Please enter your credentials',
+    loginHint: 'Secure login with encrypted credentials',
     registerTitle: 'Create Your Account',
     registerSubtitle: 'Join us to discover your ideal career path',
+    accountInfo: 'Account Information',
+    personalInfo: 'Personal Information',
     username: 'Username',
     password: 'Password',
     confirmPassword: 'Confirm Password',

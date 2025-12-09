@@ -1,97 +1,178 @@
 <template>
-  <v-container class="py-4">
-    <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="5" lg="4">
-        <v-card elevation="2">
-          <div class="bg-primary pa-3 text-center">
-            <span class="text-white text-body-1 font-weight-bold">{{ $t('auth.registerTitle') }}</span>
+  <v-container class="register-container fill-height">
+    <v-row justify="center" align="center" class="fill-height">
+      <v-col cols="12" sm="10" md="6" lg="5" xl="4">
+        <v-card elevation="8" class="register-card" rounded="lg">
+          <!-- Header with gradient -->
+          <div class="register-header">
+            <v-icon size="48" color="white" class="mb-2">mdi-account-plus</v-icon>
+            <h1 class="text-h5 font-weight-bold text-white mb-1">{{ $t('auth.registerTitle') }}</h1>
+            <p class="text-body-2 text-white text-opacity-90">{{ $t('auth.registerSubtitle') }}</p>
           </div>
-          <v-card-text class="pa-4">
-            <p class="text-body-2 text-grey mb-3">{{ $t('auth.registerSubtitle') }}</p>
+
+          <v-card-text class="pa-6">
             <v-form ref="form" @submit.prevent="handleRegister" v-model="valid">
-              <v-text-field 
-                v-model="username" 
-                :label="$t('auth.username')" 
-                prepend-icon="mdi-account" 
-                type="text"
-                :rules="usernameRules"
-                density="compact"
-                variant="outlined"
-                required></v-text-field>
-              <v-text-field 
-                v-model="password" 
-                :label="$t('auth.password')" 
-                prepend-icon="mdi-lock" 
-                :type="showPassword ? 'text' : 'password'"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="showPassword = !showPassword"
-                :rules="passwordRules"
-                density="compact"
-                variant="outlined"
-                required></v-text-field>
-              <v-text-field 
-                v-model="confirmPassword" 
-                :label="$t('auth.confirmPassword')" 
-                prepend-icon="mdi-lock-check" 
-                :type="showConfirmPassword ? 'text' : 'password'"
-                :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="showConfirmPassword = !showConfirmPassword"
-                :rules="confirmPasswordRules"
-                density="compact"
-                variant="outlined"
-                required></v-text-field>
-              <v-select 
-                v-model="department" 
-                :items="departments" 
-                :label="$t('auth.department')" 
-                prepend-icon="mdi-school"
-                :rules="requiredRules"
-                density="compact"
-                variant="outlined"
-                required></v-select>
-              
-              <v-radio-group v-model="identity" inline density="compact" class="mt-1">
-                <template v-slot:label>
-                  <span class="text-caption">{{ $t('profile.identity') }}</span>
-                </template>
-                <v-radio :label="$t('profile.student')" value="student" density="compact"></v-radio>
-                <v-radio :label="$t('profile.unemployed')" value="Unemployed" density="compact"></v-radio>
-                <v-radio :label="$t('profile.employed')" value="employed" density="compact"></v-radio>
-              </v-radio-group>
+              <!-- Account Information Section -->
+              <div class="form-section mb-4">
+                <h3 class="text-subtitle-1 font-weight-bold text-primary mb-3">
+                  <v-icon size="20" color="primary" class="mr-1">mdi-account-circle</v-icon>
+                  {{ $t('auth.accountInfo') || 'Account Information' }}
+                </h3>
+                
+                <v-text-field 
+                  v-model="username" 
+                  :label="$t('auth.username')" 
+                  prepend-inner-icon="mdi-account" 
+                  type="text"
+                  :rules="usernameRules"
+                  variant="outlined"
+                  color="primary"
+                  class="mb-2"
+                  required
+                  hint="3-50 characters"
+                  persistent-hint
+                ></v-text-field>
 
-              <v-radio-group v-model="gender" inline density="compact" class="mt-1">
-                <template v-slot:label>
-                  <span class="text-caption">{{ $t('profile.gender') }}</span>
-                </template>
-                <v-radio :label="$t('profile.female')" value="female" density="compact"></v-radio>
-                <v-radio :label="$t('profile.male')" value="male" density="compact"></v-radio>
-              </v-radio-group>
+                <v-text-field 
+                  v-model="password" 
+                  :label="$t('auth.password')" 
+                  prepend-inner-icon="mdi-lock" 
+                  :type="showPassword ? 'text' : 'password'"
+                  :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append-inner="showPassword = !showPassword"
+                  :rules="passwordRules"
+                  variant="outlined"
+                  color="primary"
+                  class="mb-2"
+                  required
+                  hint="Minimum 6 characters"
+                  persistent-hint
+                ></v-text-field>
 
-              <v-text-field 
-                v-model="email" 
-                :label="$t('profile.email')" 
-                prepend-icon="mdi-email"
-                type="email"
-                :rules="emailRules"
-                density="compact"
-                variant="outlined"></v-text-field>
+                <v-text-field 
+                  v-model="confirmPassword" 
+                  :label="$t('auth.confirmPassword')" 
+                  prepend-inner-icon="mdi-lock-check" 
+                  :type="showConfirmPassword ? 'text' : 'password'"
+                  :append-inner-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append-inner="showConfirmPassword = !showConfirmPassword"
+                  :rules="confirmPasswordRules"
+                  variant="outlined"
+                  color="primary"
+                  required
+                ></v-text-field>
+              </div>
 
-              <div class="text-center mt-3">
-                <v-btn color="primary" type="submit" :loading="loading" block>
-                  {{ loading ? $t('auth.registering') : $t('auth.registerButton') }}
-                </v-btn>
+              <!-- Personal Information Section -->
+              <div class="form-section mb-4">
+                <h3 class="text-subtitle-1 font-weight-bold text-primary mb-3">
+                  <v-icon size="20" color="primary" class="mr-1">mdi-card-account-details</v-icon>
+                  {{ $t('auth.personalInfo') || 'Personal Information' }}
+                </h3>
+
+                <v-select 
+                  v-model="department" 
+                  :items="departments" 
+                  :label="$t('auth.department')" 
+                  prepend-inner-icon="mdi-school"
+                  :rules="requiredRules"
+                  variant="outlined"
+                  color="primary"
+                  class="mb-2"
+                  required
+                ></v-select>
+
+                <v-text-field 
+                  v-model="email" 
+                  :label="$t('profile.email')" 
+                  prepend-inner-icon="mdi-email"
+                  type="email"
+                  :rules="emailRules"
+                  variant="outlined"
+                  color="primary"
+                  class="mb-3"
+                  hint="Optional"
+                  persistent-hint
+                ></v-text-field>
+
+                <!-- Identity Selection with Cards -->
+                <div class="mb-3">
+                  <label class="text-caption text-grey-darken-2 font-weight-bold mb-2 d-block">
+                    {{ $t('profile.identity') }}
+                  </label>
+                  <v-chip-group v-model="identity" mandatory color="primary" class="identity-chips">
+                    <v-chip value="student" filter variant="outlined">
+                      <v-icon start>mdi-school</v-icon>
+                      {{ $t('profile.student') }}
+                    </v-chip>
+                    <v-chip value="Unemployed" filter variant="outlined">
+                      <v-icon start>mdi-briefcase-search</v-icon>
+                      {{ $t('profile.unemployed') }}
+                    </v-chip>
+                    <v-chip value="employed" filter variant="outlined">
+                      <v-icon start>mdi-briefcase</v-icon>
+                      {{ $t('profile.employed') }}
+                    </v-chip>
+                  </v-chip-group>
+                </div>
+
+                <!-- Gender Selection with Cards -->
+                <div class="mb-2">
+                  <label class="text-caption text-grey-darken-2 font-weight-bold mb-2 d-block">
+                    {{ $t('profile.gender') }}
+                  </label>
+                  <v-chip-group v-model="gender" mandatory color="primary" class="gender-chips">
+                    <v-chip value="female" filter variant="outlined">
+                      <v-icon start>mdi-gender-female</v-icon>
+                      {{ $t('profile.female') }}
+                    </v-chip>
+                    <v-chip value="male" filter variant="outlined">
+                      <v-icon start>mdi-gender-male</v-icon>
+                      {{ $t('profile.male') }}
+                    </v-chip>
+                  </v-chip-group>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <v-btn 
+                color="primary" 
+                type="submit" 
+                :loading="loading" 
+                block 
+                size="large"
+                class="mb-3 text-none font-weight-bold"
+                elevation="2"
+              >
+                <v-icon start>mdi-account-plus</v-icon>
+                {{ loading ? $t('auth.registering') : $t('auth.registerButton') }}
+              </v-btn>
+
+              <!-- Login Link -->
+              <div class="text-center">
+                <v-divider class="mb-3"></v-divider>
+                <span class="text-body-2 text-grey-darken-1">{{ $t('auth.haveAccount') }}</span>
+                <router-link to="/login" class="ml-1 text-body-2 text-primary text-decoration-none font-weight-bold">
+                  {{ $t('auth.loginNow') }}
+                </router-link>
               </div>
             </v-form>
-            <div class="text-center mt-3">
-              <span class="text-caption text-grey">{{ $t('auth.haveAccount') }}</span>
-              <router-link to="/login" class="ml-1 text-caption">{{ $t('auth.loginNow') }}</router-link>
-            </div>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <v-snackbar v-model="snackbar.show" :color="snackbar.color">
-      {{ snackbar.text }}
+
+    <!-- Snackbar for notifications -->
+    <v-snackbar 
+      v-model="snackbar.show" 
+      :color="snackbar.color"
+      location="top"
+      :timeout="3000"
+    >
+      <div class="d-flex align-center">
+        <v-icon start>{{ snackbar.color === 'success' ? 'mdi-check-circle' : 'mdi-alert-circle' }}</v-icon>
+        {{ snackbar.text }}
+      </div>
       <template v-slot:actions>
         <v-btn variant="text" @click="snackbar.show = false">{{ $t('common.close') }}</v-btn>
       </template>
@@ -208,3 +289,65 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.register-container {
+  min-height: calc(100vh - 64px);
+  background-color: #f5f5f5;
+}
+
+.register-card {
+  overflow: hidden;
+}
+
+.register-header {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.form-section {
+  border-left: 3px solid #1976d2;
+  padding-left: 12px;
+}
+
+.identity-chips,
+.gender-chips {
+  gap: 8px;
+}
+
+.identity-chips .v-chip,
+.gender-chips .v-chip {
+  flex: 1;
+  min-width: 100px;
+  justify-content: center;
+}
+
+/* Smooth transitions */
+.v-text-field,
+.v-select {
+  transition: all 0.3s ease;
+}
+
+.v-btn {
+  transition: all 0.3s ease;
+}
+
+.v-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .register-header {
+    padding: 24px 16px;
+  }
+
+  .identity-chips .v-chip,
+  .gender-chips .v-chip {
+    min-width: 80px;
+    font-size: 0.813rem;
+  }
+}
+</style>
