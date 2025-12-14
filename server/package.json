@@ -4,8 +4,9 @@
   "type": "module",
   "scripts": {
     "start": "bun run index.js",
-    "dev": "bun --watch index.js",
-    "seed:questions": "bun run scripts/seedQuestions.js"
+    "dev": "bun --watch --no-clear-screen index.js",
+    "seed:questions": "bun run scripts/seedQuestions.js",
+    "create:admin": "bun run scripts/createAdmin.js"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.0",
