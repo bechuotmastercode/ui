@@ -16,10 +16,6 @@ if (REFRESH_TOKEN_SECRET === 'your-refresh-token-secret-key-change-in-production
   console.warn('⚠️  WARNING: Using default REFRESH_TOKEN_SECRET. Set a secure secret in production!')
 }
 
-// Initialize MongoDB connection (will be cached by connectDB)
-// Connect immediately - the connection is cached globally
-connectDB().catch(console.error)
-
 // Create Elysia app
 const app = new Elysia()
   .use(cors({
@@ -47,6 +43,10 @@ const app = new Elysia()
       secret: REFRESH_TOKEN_SECRET
     })
   )
+  // Middleware to ensure DB   connection before each request
+  .onBeforeHandle(async () => {
+    await connectDB()
+  })
   .get('/', () => ({ 
     status: 'online',
     message: 'Job Quiz API Server',
