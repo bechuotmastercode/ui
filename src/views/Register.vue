@@ -18,49 +18,22 @@
                   <v-icon size="20" color="primary" class="mr-1">mdi-account-circle</v-icon>
                   {{ $t('auth.accountInfo') || 'Account Information' }}
                 </h3>
-                
-                <v-text-field 
-                  v-model="username" 
-                  :label="$t('auth.username')" 
-                  prepend-inner-icon="mdi-account" 
-                  type="text"
-                  :rules="usernameRules"
-                  variant="outlined"
-                  color="primary"
-                  class="mb-2"
-                  required
-                  hint="3-50 characters"
-                  persistent-hint
-                ></v-text-field>
 
-                <v-text-field 
-                  v-model="password" 
-                  :label="$t('auth.password')" 
-                  prepend-inner-icon="mdi-lock" 
+                <v-text-field v-model="username" :label="$t('auth.username')" prepend-inner-icon="mdi-account"
+                  type="text" :rules="usernameRules" variant="outlined" color="primary" class="mb-2" required
+                  hint="3-50 characters" persistent-hint></v-text-field>
+
+                <v-text-field v-model="password" :label="$t('auth.password')" prepend-inner-icon="mdi-lock"
                   :type="showPassword ? 'text' : 'password'"
                   :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append-inner="showPassword = !showPassword"
-                  :rules="passwordRules"
-                  variant="outlined"
-                  color="primary"
-                  class="mb-2"
-                  required
-                  hint="Minimum 6 characters"
-                  persistent-hint
-                ></v-text-field>
+                  @click:append-inner="showPassword = !showPassword" :rules="passwordRules" variant="outlined"
+                  color="primary" class="mb-2" required hint="Minimum 6 characters" persistent-hint></v-text-field>
 
-                <v-text-field 
-                  v-model="confirmPassword" 
-                  :label="$t('auth.confirmPassword')" 
-                  prepend-inner-icon="mdi-lock-check" 
-                  :type="showConfirmPassword ? 'text' : 'password'"
+                <v-text-field v-model="confirmPassword" :label="$t('auth.confirmPassword')"
+                  prepend-inner-icon="mdi-lock-check" :type="showConfirmPassword ? 'text' : 'password'"
                   :append-inner-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append-inner="showConfirmPassword = !showConfirmPassword"
-                  :rules="confirmPasswordRules"
-                  variant="outlined"
-                  color="primary"
-                  required
-                ></v-text-field>
+                  @click:append-inner="showConfirmPassword = !showConfirmPassword" :rules="confirmPasswordRules"
+                  variant="outlined" color="primary" required></v-text-field>
               </div>
 
               <!-- Personal Information Section -->
@@ -70,30 +43,13 @@
                   {{ $t('auth.personalInfo') || 'Personal Information' }}
                 </h3>
 
-                <v-select 
-                  v-model="department" 
-                  :items="departments" 
-                  :label="$t('auth.department')" 
-                  prepend-inner-icon="mdi-school"
-                  :rules="requiredRules"
-                  variant="outlined"
-                  color="primary"
-                  class="mb-2"
-                  required
-                ></v-select>
+                <v-select v-model="department" :items="departments" :label="$t('auth.department')"
+                  prepend-inner-icon="mdi-school" :rules="requiredRules" variant="outlined" color="primary" class="mb-2"
+                  required></v-select>
 
-                <v-text-field 
-                  v-model="email" 
-                  :label="$t('profile.email')" 
-                  prepend-inner-icon="mdi-email"
-                  type="email"
-                  :rules="emailRules"
-                  variant="outlined"
-                  color="primary"
-                  class="mb-3"
-                  hint="Optional"
-                  persistent-hint
-                ></v-text-field>
+                <v-text-field v-model="email" :label="$t('profile.email')" prepend-inner-icon="mdi-email" type="email"
+                  :rules="emailRules" variant="outlined" color="primary" class="mb-3" hint="Optional"
+                  persistent-hint></v-text-field>
 
                 <!-- Identity Selection with Cards -->
                 <div class="mb-3">
@@ -135,15 +91,8 @@
               </div>
 
               <!-- Submit Button -->
-              <v-btn 
-                color="primary" 
-                type="submit" 
-                :loading="loading" 
-                block 
-                size="large"
-                class="mb-3 text-none font-weight-bold"
-                elevation="2"
-              >
+              <v-btn color="primary" type="submit" :loading="loading" block size="large"
+                class="mb-3 text-none font-weight-bold" elevation="2">
                 <v-icon start>mdi-account-plus</v-icon>
                 {{ loading ? $t('auth.registering') : $t('auth.registerButton') }}
               </v-btn>
@@ -163,12 +112,7 @@
     </v-row>
 
     <!-- Snackbar for notifications -->
-    <v-snackbar 
-      v-model="snackbar.show" 
-      :color="snackbar.color"
-      location="top"
-      :timeout="3000"
-    >
+    <v-snackbar v-model="snackbar.show" :color="snackbar.color" location="top" :timeout="3000">
       <div class="d-flex align-center">
         <v-icon start>{{ snackbar.color === 'success' ? 'mdi-check-circle' : 'mdi-alert-circle' }}</v-icon>
         {{ snackbar.text }}
@@ -182,7 +126,7 @@
 
 <script>
 import { auth } from '../store/auth'
-import { API_URL } from '../config/api'
+import { API_ENDPOINTS } from '../config/api'
 
 export default {
   name: 'Register',
@@ -252,7 +196,7 @@ export default {
 
       this.loading = true
       try {
-        const response = await fetch(`${API_URL}/register`, {
+        const response = await fetch(API_ENDPOINTS.REGISTER, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

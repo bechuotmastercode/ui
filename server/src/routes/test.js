@@ -1,7 +1,9 @@
 import { Elysia } from 'elysia'
 import mongoose from 'mongoose'
-import { TestResult } from '../models/index.js'
+import { TestResult, User } from '../models/index.js'
 import { verifyToken } from '../middleware/auth.js'
+
+const PYTHON_API_URL = "https://justinyz-career-advisor-api.hf.space";
 
 export const testRoutes = (jwt) => new Elysia()
   .post('/test-results', async ({ body, set, request }) => {
@@ -56,6 +58,60 @@ export const testRoutes = (jwt) => new Elysia()
       console.error('Save test result error:', error)
       set.status = 500
       return { success: false, message: 'Internal server error' }
+    }
+  })
+
+  .post('/analyze-career', async ({ body, set, request }) => {
+    // Verify JWT token
+    const authUser = await verifyToken(jwt, request)
+    if (!authUser) {
+      set.status = 401
+      return { success: false, message: 'Unauthorized' }
+    }
+
+    const { answers } = body
+    if (!answers) {
+      set.status = 400
+      return { success: false, message: 'Missing answers for analysis' }
+    }
+
+    try {
+      // Forward to Python microservice
+      const response = await fetch(`${PYTHON_API_URL}/api/analyze-career`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ answers })
+      })
+
+      if (!response.ok) {
+        throw new Error('Python API failed')
+      }
+
+      const aiData = await response.json()
+
+      // Save to user profile automatically
+      const user = await User.findById(authUser.userId)
+      if (user) {
+        user.profile = {
+          ...user.profile,
+          careerPath: {
+            aiSummary: aiData.ai_summary,
+            recommendedCourses: aiData.courses
+          }
+        }
+        await user.save()
+      }
+
+      return { 
+        success: true, 
+        ai_summary: aiData.ai_summary, 
+        courses: aiData.courses,
+        profile: user ? user.profile : null
+      }
+    } catch (error) {
+      console.error('Analyze career error:', error)
+      set.status = 500
+      return { success: false, message: 'AI Analysis failed' }
     }
   })
 

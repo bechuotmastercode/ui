@@ -54,9 +54,9 @@ const app = new Elysia()
     timestamp: new Date().toISOString(),
     endpoints: {
       health: '/health',
-      auth: '/login, /register, /refresh, /logout',
-      test: '/api/test',
-      user: '/api/user',
+      auth: '/api/login, /api/register, /api/refresh, /api/logout',
+      test: '/api/test-results',
+      user: '/api/users',
       questions: '/api/questions',
       chatbot: '/api/chatbot'
     }
@@ -69,16 +69,16 @@ const app = new Elysia()
     uptime: process.uptime()
   }))
   // Mount routes
-  .use((app) => {
+  .group('/api', (app) => {
     const jwtPlugin = app.decorator.jwt
     const refreshJwtPlugin = app.decorator.refreshJwt
     
-      return app
-        .use(authRoutes(jwtPlugin, refreshJwtPlugin))
-        .use(testRoutes(jwtPlugin))
-        .use(userRoutes(jwtPlugin))
-        .use(questionRoutes)
-        .use(chatbotRoutes)
+    return app
+      .use(authRoutes(jwtPlugin, refreshJwtPlugin))
+      .use(testRoutes(jwtPlugin))
+      .use(userRoutes(jwtPlugin))
+      .use(questionRoutes)
+      .use(chatbotRoutes)
   })
 
 // Export the Elysia app as default (required for Vercel)

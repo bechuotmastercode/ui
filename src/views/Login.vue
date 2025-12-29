@@ -12,42 +12,17 @@
 
           <v-card-text class="pa-6">
             <v-form @submit.prevent="handleLogin">
-              <v-text-field 
-                v-model="username" 
-                :label="$t('auth.username')" 
-                prepend-inner-icon="mdi-account" 
-                type="text"
-                variant="outlined"
-                color="primary"
-                class="mb-3"
-                required
-                autofocus
-                :error-messages="errors.username"
-              ></v-text-field>
+              <v-text-field v-model="username" :label="$t('auth.username')" prepend-inner-icon="mdi-account" type="text"
+                variant="outlined" color="primary" class="mb-3" required autofocus
+                :error-messages="errors.username"></v-text-field>
 
-              <v-text-field 
-                v-model="password" 
-                :label="$t('auth.password')" 
-                prepend-inner-icon="mdi-lock" 
-                :type="showPassword ? 'text' : 'password'"
-                :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append-inner="showPassword = !showPassword"
-                variant="outlined"
-                color="primary"
-                class="mb-4"
-                required
-                :error-messages="errors.password"
-              ></v-text-field>
+              <v-text-field v-model="password" :label="$t('auth.password')" prepend-inner-icon="mdi-lock"
+                :type="showPassword ? 'text' : 'password'" :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append-inner="showPassword = !showPassword" variant="outlined" color="primary" class="mb-4"
+                required :error-messages="errors.password"></v-text-field>
 
-              <v-btn 
-                color="primary" 
-                type="submit" 
-                :loading="loading" 
-                block 
-                size="large"
-                class="mb-4 text-none font-weight-bold"
-                elevation="2"
-              >
+              <v-btn color="primary" type="submit" :loading="loading" block size="large"
+                class="mb-4 text-none font-weight-bold" elevation="2">
                 <v-icon start>mdi-login</v-icon>
                 {{ loading ? $t('auth.loggingIn') : $t('auth.loginButton') }}
               </v-btn>
@@ -67,12 +42,7 @@
     </v-row>
 
     <!-- Snackbar for notifications -->
-    <v-snackbar 
-      v-model="snackbar.show" 
-      :color="snackbar.color"
-      location="top"
-      :timeout="3000"
-    >
+    <v-snackbar v-model="snackbar.show" :color="snackbar.color" location="top" :timeout="3000">
       <div class="d-flex align-center">
         <v-icon start>{{ snackbar.color === 'success' ? 'mdi-check-circle' : 'mdi-alert-circle' }}</v-icon>
         {{ snackbar.text }}
@@ -86,7 +56,7 @@
 
 <script>
 import { auth } from '../store/auth'
-import { API_URL } from '../config/api'
+import { API_ENDPOINTS } from '../config/api'
 
 export default {
   name: 'Login',
@@ -111,7 +81,7 @@ export default {
     async handleLogin() {
       this.loading = true
       try {
-        const response = await fetch(`${API_URL}/login`, {
+        const response = await fetch(API_ENDPOINTS.LOGIN, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: this.username, password: this.password })

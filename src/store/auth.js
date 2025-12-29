@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { API_URL } from '../config/api'
+import { API_ENDPOINTS } from '../config/api'
 
 export const auth = reactive({
   isLoggedIn: false,
@@ -37,7 +37,7 @@ export const auth = reactive({
     // Call logout endpoint to invalidate refresh token
     if (this.refreshToken) {
       try {
-        await fetch(`${API_URL}/logout`, {
+        await fetch(API_ENDPOINTS.LOGOUT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ refreshToken: this.refreshToken })
@@ -64,7 +64,7 @@ export const auth = reactive({
     }
 
     try {
-      const response = await fetch(`${API_URL}/refresh`, {
+      const response = await fetch(API_ENDPOINTS.REFRESH, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ refreshToken: this.refreshToken })

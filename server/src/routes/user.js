@@ -34,7 +34,8 @@ export const userRoutes = (jwt) => new Elysia()
       durationOfStudy,
       departmentInstitute,
       yearClass,
-      studentId
+      studentId,
+      careerPath
     } = body
 
     // Validate email format if provided
@@ -78,7 +79,8 @@ export const userRoutes = (jwt) => new Elysia()
         departmentInstitute: departmentInstitute || null,
         yearClass: yearClass || null,
         studentId: studentId || null,
-        agreedToTerms: user.profile?.agreedToTerms || false
+        agreedToTerms: user.profile?.agreedToTerms || false,
+        careerPath: careerPath || user.profile?.careerPath || null
       }
 
       await user.save()

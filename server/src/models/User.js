@@ -50,7 +50,20 @@ const userSchema = new mongoose.Schema({
     departmentInstitute: { type: String, default: null },
     yearClass: { type: Number, default: null },
     studentId: { type: String, default: null },
-    agreedToTerms: { type: Boolean, default: false }
+    agreedToTerms: { type: Boolean, default: false },
+    careerPath: {
+      aiSummary: { type: String, default: null },
+      recommendedCourses: [{
+        code: String,
+        name: String,
+        department: String,
+        description: String,
+        taught_in_english: Boolean,
+        credits: Number,
+        match_score: Number,
+        level: Number
+      }]
+    }
   }
 }, {
   timestamps: true
