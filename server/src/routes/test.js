@@ -5,8 +5,8 @@ import { verifyToken } from '../middleware/auth.js'
 
 const PYTHON_API_URL = "https://justinyz-career-advisor-api.hf.space";
 
-export const testRoutes = (jwt) => new Elysia()
-  .post('/test-results', async ({ body, set, request }) => {
+export const testRoutes = new Elysia()
+  .post('/test-results', async ({ body, set, request, jwt }) => {
     // Verify JWT token
     const authUser = await verifyToken(jwt, request)
     
@@ -61,7 +61,7 @@ export const testRoutes = (jwt) => new Elysia()
     }
   })
 
-  .post('/analyze-career', async ({ body, set, request }) => {
+  .post('/analyze-career', async ({ body, set, request, jwt }) => {
     // Verify JWT token
     const authUser = await verifyToken(jwt, request)
     if (!authUser) {
@@ -92,12 +92,10 @@ export const testRoutes = (jwt) => new Elysia()
       // Save to user profile automatically
       const user = await User.findById(authUser.userId)
       if (user) {
-        user.profile = {
-          ...user.profile,
-          careerPath: {
-            aiSummary: aiData.ai_summary,
-            recommendedCourses: aiData.courses
-          }
+        // Update only careerPath to avoid Mongoose casting issues with other profile fields
+        user.profile.careerPath = {
+          aiSummary: aiData.ai_summary,
+          recommendedCourses: aiData.courses
         }
         await user.save()
       }
@@ -115,7 +113,7 @@ export const testRoutes = (jwt) => new Elysia()
     }
   })
 
-  .get('/test-results/:userId', async ({ params, set, request }) => {
+  .get('/test-results/:userId', async ({ params, set, request, jwt }) => {
     // Verify JWT token
     const authUser = await verifyToken(jwt, request)
     

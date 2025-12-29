@@ -2,8 +2,8 @@ import { Elysia } from 'elysia'
 import { User } from '../models/index.js'
 import { verifyToken } from '../middleware/auth.js'
 
-export const userRoutes = (jwt) => new Elysia()
-  .put('/users/:userId/profile', async ({ params, body, set, request }) => {
+export const userRoutes = new Elysia()
+  .put('/users/:userId/profile', async ({ params, body, set, request, jwt }) => {
     // Verify JWT token
     const authUser = await verifyToken(jwt, request)
     

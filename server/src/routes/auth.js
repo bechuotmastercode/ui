@@ -4,8 +4,8 @@ import { User, RefreshToken } from '../models/index.js'
 
 const SALT_ROUNDS = 10
 
-export const authRoutes = (jwt, refreshJwt) => new Elysia()
-  .post('/register', async ({ body, set }) => {
+export const authRoutes = new Elysia()
+  .post('/register', async ({ body, set, jwt, refreshJwt }) => {
     const {
       username,
       password,
@@ -164,7 +164,7 @@ export const authRoutes = (jwt, refreshJwt) => new Elysia()
     }
   })
 
-  .post('/login', async ({ body, set }) => {
+  .post('/login', async ({ body, set, jwt, refreshJwt }) => {
     const { username, password } = body
 
     if (!username || !password) {
@@ -207,6 +207,10 @@ export const authRoutes = (jwt, refreshJwt) => new Elysia()
         token: refreshToken
       })
 
+      console.log('Login successful for user:', user.username)
+      console.log('Generated Access Token:', !!accessToken)
+      console.log('Generated Refresh Token:', !!refreshToken)
+
       return {
         success: true,
         user: {
@@ -225,7 +229,7 @@ export const authRoutes = (jwt, refreshJwt) => new Elysia()
     }
   })
 
-  .post('/refresh', async ({ body, set }) => {
+  .post('/refresh', async ({ body, set, refreshJwt, jwt }) => {
     const { refreshToken } = body
 
     if (!refreshToken) {

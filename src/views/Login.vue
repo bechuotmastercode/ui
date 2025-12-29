@@ -87,6 +87,7 @@ export default {
           body: JSON.stringify({ username: this.username, password: this.password })
         })
         const data = await response.json()
+        console.log('Login response data:', data)
 
         if (data.success && data.accessToken && data.refreshToken) {
           auth.login(data.user, data.accessToken, data.refreshToken)
@@ -100,9 +101,15 @@ export default {
             this.$router.push({ name: 'Home' })
           }
         } else {
+          console.warn('Login failed condition met:', {
+            success: data.success,
+            hasAccessToken: !!data.accessToken,
+            hasRefreshToken: !!data.refreshToken
+          })
           this.showSnackbar(data.message || 'Login failed', 'error')
         }
       } catch (error) {
+        console.error('Login error details:', error)
         this.showSnackbar('An error occurred', 'error')
       } finally {
         this.loading = false

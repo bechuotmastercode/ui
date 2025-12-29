@@ -179,7 +179,7 @@ function generateQuickReplies(userMessage, context) {
   return ['Take career quiz', 'How does the quiz work?', 'Career options']
 }
 
-export const chatbotRoutes = new Elysia({ prefix: '/api/chatbot' })
+export const chatbotRoutes = new Elysia({ prefix: '/chatbot' })
   .post('/message', async ({ body, set }) => {
     try {
       const { message, context } = body

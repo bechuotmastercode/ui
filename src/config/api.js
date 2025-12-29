@@ -1,4 +1,4 @@
-export const API_URL = import.meta.env.PROD ? "" : "http://localhost:3000";
+export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export const PYTHON_API_URL = "https://justinyz-career-advisor-api.hf.space";
 
