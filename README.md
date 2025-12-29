@@ -16,20 +16,27 @@
 
 ## Table of Contents
 
-- [Features](#features)
-- [Architecture](#architecture)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Environment Configuration](#environment-configuration)
-  - [Running the Application](#running-the-application)
-- [Testing](#testing)
-- [Project Structure](#project-structure)
-- [API Endpoints](#api-endpoints)
-- [Internationalization](#internationalization)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
+- [Job Quiz](#job-quiz)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+    - [Career Assessment](#career-assessment)
+    - [AI Chatbot](#ai-chatbot)
+    - [User Management](#user-management)
+    - [Accessibility](#accessibility)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Environment Configuration](#environment-configuration)
+      - [Frontend (`client/.env`)](#frontend-clientenv)
+      - [Backend (`server/.env`)](#backend-serverenv)
+    - [Running the Application](#running-the-application)
+      - [Development Mode (Recommended)](#development-mode-recommended)
+      - [Run Separately](#run-separately)
+    - [Database Seeding](#database-seeding)
+  - [Testing](#testing)
+    - [Test Categories](#test-categories)
+    - [Running Tests](#running-tests)
+  - [Project Structure](#project-structure)
 
 ## Features
 
@@ -79,6 +86,7 @@
 2.  **Install frontend dependencies**
 
     ```bash
+    cd client
     bun install
     # or: npm install
     ```
@@ -94,9 +102,9 @@
 
 ### Environment Configuration
 
-#### Frontend (`.env`)
+#### Frontend (`client/.env`)
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the `client` directory:
 
 ```env
 # API Configuration
@@ -130,6 +138,7 @@ GEMINI_API_KEY=your-gemini-api-key-here
 Start both frontend and backend simultaneously:
 
 ```bash
+cd client
 bun run app
 # or: npm run app
 ```
@@ -144,6 +153,7 @@ This will start:
 **Frontend only:**
 
 ```bash
+cd client
 bun run dev
 ```
 
@@ -202,7 +212,7 @@ bun run test -- --ui
 
 ## Project Structure
 
-```
+```tree
 job-quiz/
 ├── public/              # Static assets
 ├── src/                 # Frontend source code
@@ -233,5 +243,3 @@ job-quiz/
 ├── vite.config.js       # Vite configuration
 └── README.md            # This file
 ```
-
----
