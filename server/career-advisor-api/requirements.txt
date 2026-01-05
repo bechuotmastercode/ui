@@ -1,0 +1,11 @@
+groq
+numpy
+pandas
+scikit-learn
+notebook
+fastapi
+uvicorn
+sentence-transformers
+torch
+google generativeai
+dotenv

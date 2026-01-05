@@ -1,0 +1,91 @@
+Final Project Report: Job Quiz - AI-Powered Career Assessment Platform
+
+1) Background and Problem Domain
+
+Background:
+In the rapidly evolving digital economy, the landscape of employment is shifting constantly. New roles in technology, data science, and digital media are emerging, while traditional roles are transforming. This dynamic environment creates significant challenges for students, graduates, and career changers who must navigate complex career paths.
+
+Relevance to Smart Recruitment and EdTech:
+While "smart manufacturing" focuses on optimizing production through data and automation, this project operates in the domain of "Smart Recruitment" and "Educational Technology (EdTech)." Just as smart manufacturing aims to efficiently allocate resources, the "Job Quiz" platform aims to efficiently allocate human capital by matching individuals with careers where they will be most productive and satisfied. This area matters because career misalignment leads to low job satisfaction, reduced economic productivity, and high turnover rates in the industry.
+
+2) Target Problem
+
+Main Problem:
+Many individuals, particularly students and early-career professionals, lack access to personalized, data-driven career guidance. They often face "analysis paralysis" due to the overwhelming number of career options or lack awareness of how their specific skills and interests translate into modern job roles (e.g., understanding the difference between a Data Scientist and a Data Analyst).
+
+Challenges:
+- Accessibility: Professional career counseling is often expensive and time-consuming.
+- Static Solutions: Traditional online career tests are often static, providing generic results without the ability to ask follow-up questions or get tailored advice.
+- Information Gap: There is a disconnect between educational curriculums and real-world job market requirements.
+
+Importance:
+Solving this problem is crucial for empowering the workforce of the future. By providing accessible, accurate, and interactive career guidance, we can help individuals make informed decisions, reduce the skills gap in the tech industry, and foster a more engaged and capable workforce.
+
+3) Existing Work Related to the Problem
+
+Existing Solutions:
+- Traditional Career Counseling: Human counselors provide high-quality, personalized advice but are not scalable or affordable for everyone.
+- Static Online Quizzes (e.g., 16Personalities, Holland Code tests): These provide a basic categorization but lack interactivity. Users cannot ask "How do I become a UI/UX Designer?" after getting their result.
+- Job Boards (LinkedIn, Indeed): These list jobs but do not help users understand *which* jobs they are suited for.
+
+Gaps and Limitations:
+- Lack of Interactivity: Most existing automated tools are one-way streets (input -> output). They do not support a dialogue.
+- Generic Advice: Results are often broad templates rather than actionable roadmaps.
+- Disconnected Experience: Users often have to take a test on one site and research career paths on another.
+
+4) Proposed Solution
+
+Approach:
+"Job Quiz" is an integrated web platform that combines a psychometric career assessment with an AI-powered career counselor. The solution bridges the gap between static assessment and human counseling by using Generative AI to provide context-aware, personalized guidance based on the user's test results.
+
+System Architecture Diagram Description:
+[Client Side]                  [Server Side]                     [External Services]
++----------------+            +-------------------+             +---------------------+
+| Vue.js App     | <--------> | Elysia (Bun) API  | <---------> | MongoDB Atlas       |
+| (Vuetify UI)   |    HTTP    | Gateway           |             | (User Data/Results) |
++----------------+            +-------------------+             +---------------------+
+       ^                                |
+       |                                v
+       |                      +-------------------+
+       +--------------------> | Google Gemini API |
+                              | (AI Intelligence) |
+                              +-------------------+
+
+Methods and Technologies:
+- Hybrid Assessment Model: Uses a structured questionnaire to determine the user's inclination towards four key domains: Technical, Business, Creative, and Interdisciplinary.
+- Generative AI Integration: Utilizes Google's Gemini model to power a chatbot that understands the user's context (test results) and provides specific advice on skills, certifications, and learning paths.
+- Modern Web Stack: Built with performance and scalability in mind using the Bun runtime and Vue.js.
+
+5) Implementation
+
+Tools and Technologies:
+- Frontend: Vue.js 3 (Composition API) for a reactive user interface, styled with Vuetify for a professional, responsive design.
+- Backend: ElysiaJS running on the Bun runtime for high-performance HTTP handling.
+- Database: MongoDB (via Mongoose) for flexible storage of user profiles, quiz questions, and historical test results.
+- AI Engine: Google Generative AI SDK (@google/generative-ai) for the chatbot functionality.
+- Testing: Vitest for unit testing and integration testing to ensure reliability.
+
+Key Algorithms and Code Explanation:
+- Scoring Algorithm: The system aggregates user responses across weighted categories (Technical, Business, Creative, Interdisciplinary). The highest-scoring category determines the primary career recommendation.
+- Context-Aware Prompting: The chatbot route (`/chat`) injects a "System Prompt" that defines the AI's persona as a "Job Assistant." It instructs the AI to provide actionable advice (skills, roadmaps) and adapt to the user's language (English, Vietnamese, Traditional Chinese).
+- Authentication: Secure user management using JWT (JSON Web Tokens) and bcrypt for password hashing, ensuring user data privacy.
+
+Testing and Evaluation:
+- Functional Testing: Verified the registration, login, and quiz submission flows.
+- AI Response Quality: Tested the chatbot with various career-related queries to ensure it stays within the scope of career guidance and provides accurate information.
+- Performance: The use of Bun and Elysia ensures low-latency API responses, crucial for the real-time chat experience.
+
+6) Result
+
+Outcomes:
+The project successfully delivers a fully functional career assessment platform. Users can:
+1.  Securely register and log in.
+2.  Complete an interactive career quiz.
+3.  Receive immediate, visualized results indicating their career personality type.
+4.  Engage in a natural language conversation with an AI advisor to explore their results further.
+
+System Demo:
+- The application features a clean, modern dashboard.
+- The "Career Test" page guides users through questions dynamically.
+- The "Chatbot" component floats accessibly, ready to answer questions like "What skills do I need for this role?"
+- (Note: Insert link to demo video or hosted website here if available, e.g., Vercel deployment).
