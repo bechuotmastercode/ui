@@ -1,89 +1,203 @@
-# Job Quiz
+# AI Career Advisor System
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Vue.js-3.5-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" alt="Vue.js"/>
-  <img src="https://img.shields.io/badge/Vuetify-3.10-1867C0?style=for-the-badge&logo=vuetify&logoColor=white" alt="Vuetify"/>
-  <img src="https://img.shields.io/badge/Bun-Runtime-f9f1e1?style=for-the-badge&logo=bun&logoColor=black" alt="Bun"/>
-  <img src="https://img.shields.io/badge/Elysia-1.4-7c3aed?style=for-the-badge" alt="Elysia"/>
-  <img src="https://img.shields.io/badge/MongoDB-8.20-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB"/>
-</p>
+<div align="center">
 
-<p align="center">
-  <strong>An intelligent career assessment platform powered by AI to help users discover their ideal career paths.</strong>
-</p>
+<img src="https://img.shields.io/badge/Vue.js-3.5-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" alt="Vue.js"/>
+<img src="https://img.shields.io/badge/Vuetify-3.10-1867C0?style=for-the-badge&logo=vuetify&logoColor=white" alt="Vuetify"/>
+<img src="https://img.shields.io/badge/Bun-Runtime-f9f1e1?style=for-the-badge&logo=bun&logoColor=black" alt="Bun"/>
+<img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+<img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TF-IDF"/>
+<img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="Hugging Face"/>
+<img src="https://img.shields.io/badge/MongoDB-8.20-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB"/>
+
+<br/>
+
+<strong>An intelligent career assessment platform powered by AI to help YZU students discover ideal career paths and mapping course curriculums.</strong>
+
+[Live API Demo](https://justinyz-career-advisor-api.hf.space)
+
+</div>
 
 ---
 
 ## Table of Contents
 
-- [Job Quiz](#job-quiz)
+- [AI Career Advisor System](#ai-career-advisor-system)
   - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
   - [Features](#features)
-    - [Career Assessment](#career-assessment)
-    - [AI Chatbot](#ai-chatbot)
-    - [User Management](#user-management)
-    - [Accessibility](#accessibility)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-    - [Environment Configuration](#environment-configuration)
-      - [Frontend (`client/.env`)](#frontend-clientenv)
-      - [Backend (`server/.env`)](#backend-serverenv)
-    - [Running the Application](#running-the-application)
-      - [Development Mode (Recommended)](#development-mode-recommended)
-      - [Run Separately](#run-separately)
-    - [Database Seeding](#database-seeding)
-  - [Testing](#testing)
-    - [Test Categories](#test-categories)
-    - [Running Tests](#running-tests)
+    - [AI \& Backend](#ai--backend)
+    - [Frontend \& UI](#frontend--ui)
   - [Project Structure](#project-structure)
-
-## Features
-
-### Career Assessment
-
-- **Interactive Quiz** — Take a comprehensive career test with dynamically loaded questions
-- **AI-Powered Results** — Get personalized career recommendations based on your responses
-- **Result History** — Track and review your past assessment results
-
-### AI Chatbot
-
-- **Gemini Integration** — Powered by Google's Generative AI for intelligent career guidance
-- **Contextual Conversations** — Get personalized advice based on your quiz results
-
-### User Management
-
-- **Secure Authentication** — JWT-based login and registration with access/refresh tokens
-- **User Profiles** — Manage your account and view your career journey
-- **Admin Dashboard** — Administrative tools for managing users and content
-
-### Accessibility
-
-- **Multi-language Support** — Available in English and Traditional Chinese (繁體中文)
-- **Responsive Design** — Beautiful UI with Vuetify that works on all devices
+  - [Prerequisites](#prerequisites)
+  - [Installation \& Setup](#installation--setup)
+    - [1. Backend Setup (AI/Python)](#1-backend-setup-aipython)
+    - [2. Frontend Setup (Vue/Bun)](#2-frontend-setup-vuebun)
+  - [Running the Application](#running-the-application)
+    - [Step 1: Start the AI Backend (Optional)](#step-1-start-the-ai-backend-optional)
+    - [Step 2: Start the Frontend \& Middleware](#step-2-start-the-frontend--middleware)
+  - [Deployment](#deployment)
+    - [AI API](#ai-api)
+    - [Frontend \& Backend](#frontend--backend)
+  - [Contributors](#contributors)
 
 ---
 
-## Getting Started
+## Project Overview
 
-### Prerequisites
+The **AI Career Advisor System** is a website designed to solve the difficulties and ineffectiveness of course selection and career planning. It combines a **Vue.js** web interface with a **Python-based AI engine** that uses TF-IDF and LLMs to recommend courses based on user personality and skill sets, thus, students won't have to waste time or choose useless courses.
 
-| Requirement | Version | Notes                                                                         |
-| ----------- | ------- | ----------------------------------------------------------------------------- |
-| **Bun**     | Latest  | Recommended runtime ([Install Bun](https://bun.sh))                           |
-| **Node.js** | 18+     | Alternative if not using Bun                                                  |
-| **MongoDB** | 6+      | Local or [MongoDB Atlas](https://www.mongodb.com/atlas) (free tier available) |
+---
 
-### Installation
+## Features
 
-1.  **Clone the repository**
+### AI & Backend
 
-    ```bash
-    git clone <repository-url>
-    cd job-quiz
-    ```
+- **Course Recommendation Engine:** Uses TF-IDF and Cosine Similarity to map user skills to YZU curriculum.
+- **Data Pipeline:** Custom web scrapers (`Selenium`) that aggregate course data.
+- **Hugging Face Integration:** Deployed API for public access.
+- **LLM Enrichment:** Uses Google Gemini/Groq to enhance course descriptions.
 
-2.  **Install frontend dependencies**
+### Frontend & UI
+
+- **Interactive Quiz:** Effective career test with already prepared and ready questions to test compatibility.
+- **AI Chatbot:** Conversations and questions for career guidance powered by Gemini.
+- **User Dashboard:** Track result history and manage user profiles.
+- **Supports both languages:** Support for English and Traditional Chinese (繁體中文).
+- **Responsive Design:** Built with Vuetify for mobile and desktop.
+- **Secure Authentication:** JWT-based login and registration with access/refresh tokens.
+- **Admin Dashboard:** Administrative tools for managing users and content.
+
+---
+
+## Project Structure
+
+This repository contains both the AI Engine and the User Interface.
+
+```text
+Project Root
+├── client/                   # Vue.js Frontend Application
+│   ├── src/                  # Vue source code
+│   │   ├── assets/           # Images, fonts, etc.
+│   │   ├── components/       # Reusable Vue components
+│   │   │   ├── Chatbot.vue
+│   │   │   └── HelloWorld.vue
+│   │   ├── config/           # Frontend configuration
+│   │   │   └── api.js
+│   │   ├── i18n/             # Internationalization
+│   │   │   └── locales/      # Language files (en, zh-TW)
+│   │   ├── router/           # Vue Router configuration
+│   │   ├── services/         # API service layer
+│   │   │   └── chatbot.js
+│   │   ├── store/            # State management
+│   │   │   └── auth.js
+│   │   ├── views/            # Page components
+│   │   │   ├── Home.vue
+│   │   │   ├── CareerTest.vue
+│   │   │   ├── Results.vue
+│   │   │   ├── Login.vue
+│   │   │   ├── Register.vue
+│   │   │   ├── Profile.vue
+│   │   │   └── ...
+│   │   ├── App.vue           # Root component
+│   │   ├── main.js           # Application entry point
+│   │   └── style.css         # Global styles
+│   ├── tests/                # Test suites
+│   │   ├── unit/             # Component and utility unit tests
+│   │   ├── integration/      # API and service integration tests
+│   │   ├── functional/       # User workflow and feature tests
+│   │   └── e2e/              # End-to-end browser tests
+│   ├── public/               # Static assets
+│   ├── package.json          # Frontend dependencies
+│   ├── vite.config.js        # Vite configuration
+│   └── vercel.json           # Vercel deployment config
+│
+├── server/                   # Backend API & Services
+│   ├── career-advisor-api/   # Python AI Recommendation Engine
+│   │   ├── data/             # Processed datasets and CSVs
+│   │   │   ├── Processed/    # Cleaned and enriched data
+│   │   │   │   ├── enriched_courses_SAMPLE.jsonl
+│   │   │   │   ├── training_data.json
+│   │   │   │   ├── prototype_skill_embeddings.npy
+│   │   │   │   └── course_data/
+│   │   │   └── Raw/          # Original data sources
+│   │   │       ├── JobsDatasetProcessed.csv
+│   │   │       └── raw_html/
+│   │   ├── models/           # Pickle models and logic
+│   │   ├── src/              # Source code
+│   │   │   ├── data_pipeline/    # Scrapers and data processing
+│   │   │   │   ├── apicreatedescription_pro.py
+│   │   │   │   ├── cleaner.py
+│   │   │   │   └── yzucurriculumscrapping.py
+│   │   │   ├── mapping/          # Skill mapping and course matching
+│   │   │   │   ├── generate_skills_from_descriptions.py
+│   │   │   │   ├── prototype_map_courses.py
+│   │   │   │   └── run_mapping.py
+│   │   │   └── models/           # AI models and API
+│   │   │       ├── engine.py            # Recommendation engine
+│   │   │       ├── enhanced_api.py      # API endpoints
+│   │   │       └── create_training_data.py
+│   │   ├── requirements.txt  # Python dependencies
+│   │   ├── training_data.json
+│   │   └── README.md
+│   │
+│   ├── src/                  # Node.js/Bun Backend
+│   │   ├── config/           # Server configuration (database)
+│   │   │   └── database.js
+│   │   ├── middleware/       # Express middleware (auth)
+│   │   │   └── auth.js
+│   │   ├── models/           # Mongoose models
+│   │   │   ├── User.js
+│   │   │   ├── Question.js
+│   │   │   ├── TestResult.js
+│   │   │   └── RefreshToken.js
+│   │   ├── routes/           # API route handlers
+│   │   │   ├── auth.js
+│   │   │   ├── chatbot.js
+│   │   │   ├── questions.js
+│   │   │   ├── test.js
+│   │   │   └── user.js
+│   │   ├── index.js          # Server entry point
+│   │   └── question.json
+│   │
+│   ├── api/                  # Vercel API handlers
+│   │   └── index.js
+│   ├── scripts/              # Database scripts (seed, admin)
+│   │   └── seedQuestions.js
+│   ├── package.json          # Backend dependencies
+│   ├── vercel.json           # Vercel deployment config
+│   └── index.js
+│
+└── README.md                 # This file
+```
+
+---
+
+## Prerequisites
+
+| Technology | Version | Usage |
+| --- | --- | --- |
+| **Python** | 3.10+ | AI Engine & Data Processing |
+| **Bun** | Latest | Frontend Runtime ([Install Bun](https://bun.sh)) |
+| **Node.js** | 18+ | Alternative if not using Bun |
+| **MongoDB** | 6.0+ | User Data & Quiz History ([MongoDB Atlas](https://www.mongodb.com/atlas) free tier available) |
+
+---
+
+## Installation & Setup
+
+### 1. Backend Setup (AI/Python)
+
+Navigate to the AI backend folder and install the required Python libraries.
+
+```bash
+cd server/career-advisor-api
+pip install -r requirements.txt
+```
+
+### 2. Frontend Setup (Vue/Bun)
+
+1. **Install frontend dependencies**
 
     ```bash
     cd client
@@ -91,53 +205,34 @@
     # or: npm install
     ```
 
-3.  **Install backend dependencies**
+2. **Install backend dependencies**
 
     ```bash
     cd server
     bun install
-    # or: npm install
-    cd ..
-    ```
 
-### Environment Configuration
+## Running the Application
 
-#### Frontend (`client/.env`)
+To run the full system locally, you need to start the Python AI Backend and the Frontend server separately.
 
-Create a `.env` file in the `client` directory:
+### Step 1: Start the AI Backend (Optional)
 
-```env
-# API Configuration
-VITE_API_URL=http://localhost:3000
-
-# For production, set this to your deployed backend URL
-# VITE_API_URL=https://your-backend-url.vercel.app
-```
-
-#### Backend (`server/.env`)
-
-Create a `.env` file in the `server` directory:
-
-```env
-# MongoDB Connection String
-MONGODB_URI=mongodb://localhost:27017/job-quiz
-
-# JWT Secrets (CHANGE THESE IN PRODUCTION!)
-ACCESS_TOKEN_SECRET=your-super-secret-access-token-key
-REFRESH_TOKEN_SECRET=your-super-secret-refresh-token-key
-
-# Google Gemini API Key
-# Get your key from: https://aistudio.google.com/apikey
-GEMINI_API_KEY=your-gemini-api-key-here
-```
-
-### Running the Application
-
-#### Development Mode (Recommended)
-
-Start both frontend and backend simultaneously:
+If you want to run the local recommendation engine:
 
 ```bash
+# From the server/career-advisor-api/ directory
+cd server/career-advisor-api
+python src/models/enhanced_api.py
+```
+
+> **Note:** The application is configured to use the deployed Hugging Face API by default. Running the local AI backend is optional for development.
+
+### Step 2: Start the Frontend & Middleware
+
+This runs the UI and the Node.js server.
+
+```bash
+# From the client/ directory
 cd client
 bun run app
 # or: npm run app
@@ -145,101 +240,33 @@ bun run app
 
 This will start:
 
-- **Frontend**: http://localhost:5173
-- **Backend**: http://localhost:3000
+- **Frontend**: <http://localhost:5173>
+- **Backend**: <http://localhost:3000>
 
-#### Run Separately
+## Deployment
 
-**Frontend only:**
+### AI API
 
-```bash
-cd client
-bun run dev
-```
+The Python AI Backend is deployed and accessible via Hugging Face:
 
-**Backend only:**
+> **URL:** <https://justinyz-career-advisor-api.hf.space>
 
-```bash
-cd server
-bun run dev
-```
+### Frontend & Backend
 
-### Database Seeding
+The application can be deployed to platforms like Vercel or Render. Configuration files are already included:
 
-Populate the database with initial quiz questions:
-
-```bash
-cd server
-bun run seed:questions
-```
-
-Create an admin user:
-
-```bash
-cd server
-bun run create:admin
-```
+- `client/vercel.json` - Frontend deployment configuration
+- `server/vercel.json` - Backend API deployment configuration
 
 ---
 
-## Testing
+## Contributors
 
-The project includes a comprehensive testing suite using **Vitest** with Playwright for browser testing.
+**Group 7 - Yuan Ze University**
 
-### Test Categories
-
-| Type            | Directory            | Description                       |
-| --------------- | -------------------- | --------------------------------- |
-| **Unit**        | `tests/unit/`        | Component and utility unit tests  |
-| **Integration** | `tests/integration/` | API and service integration tests |
-| **Functional**  | `tests/functional/`  | User workflow and feature tests   |
-| **E2E**         | `tests/e2e/`         | End-to-end browser tests          |
-
-### Running Tests
-
-```bash
-# Run all tests
-bun run test
-
-# Run tests once (no watch mode)
-bun run test:clean
-
-# Run tests with UI
-bun run test -- --ui
-```
+- **Justin (Le Ho Trong Tin)**
+- **Nury (Nursoltan)**
+- **Conor (Kohsuke)**
+- **Lumi (Dai Chung Sin)**
 
 ---
-
-## Project Structure
-
-```tree
-job-quiz/
-├── public/              # Static assets
-├── src/                 # Frontend source code
-│   ├── assets/          # Images, fonts, etc.
-│   ├── components/      # Reusable Vue components
-│   ├── config/          # Frontend configuration
-│   ├── i18n/            # Internationalization
-│   │   └── locales/     # Language files (en, zh-TW)
-│   ├── router/          # Vue Router configuration
-│   ├── services/        # API service layer
-│   ├── store/           # State management
-│   ├── views/           # Page components
-│   ├── App.vue             # Root component
-│   ├── main.js             # Application entry point
-│   └── style.css           # Global styles
-├── server/              # Backend source code
-│   ├── api/             # Vercel API handlers
-│   ├── scripts/         # Database scripts
-│   └── src/
-│       ├── config/      # Server configuration
-│       ├── middleware/  # Express middleware
-│       ├── models/      # Mongoose models
-│       ├── routes/      # API route handlers
-│       └── index.js        # Server entry point
-├── tests/               # Test suites
-├── .env.example         # Environment template
-├── package.json         # Frontend dependencies
-├── vite.config.js       # Vite configuration
-└── README.md            # This file
-```
